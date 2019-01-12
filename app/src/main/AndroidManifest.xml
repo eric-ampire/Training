@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
 
-        <!---->
+        <!-- View Pager -->
         <activity
             android:label="ViewPager"
             android:name=".ViewPagerActivity">
