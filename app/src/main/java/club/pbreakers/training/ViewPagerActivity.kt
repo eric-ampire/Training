@@ -1,89 +1,110 @@
 package club.pbreakers.training
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Layout
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_view_pager.*
 import kotlinx.android.synthetic.main.viewpager_item.view.*
-import java.util.*
-import kotlin.coroutines.experimental.coroutineContext
 
-class ViewPagerActivity : AppCompatActivity() {
+class ViewPagerActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
+
+    var currentPosition = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_pager)
 
-        var currentPosition = 0
-
         val data = arrayListOf(
-            Item("Shekinah", "Lorem idfdfdfdfd", R.drawable.ic_backup_black_24dp),
-            Item("Eric", "Lorem idfdfdfdfd", R.drawable.ic_backup_black_24dp),
-            Item("Bigomoker", "Lorem idfdfdfdfd", R.drawable.ic_backup_black_24dp),
-            Item("Bigomoker", "Lorem idfdfdfdfd", R.drawable.ic_backup_black_24dp)
+            Item(
+                "Upload",
+                "To create a basic JUnit 4 test class, create a Java class for testing in the directory specified at the beginning of this section. It should contain one or more methods and behavior rules defined by JUnit annotations.",
+                R.drawable.ic_backup_black_24dp
+            ),
+            Item(
+                "Safe",
+                "To create a basic JUnit 4 test class, create a Java class for testing in the directory specified at the beginning of this section. It should contain one or more methods and behavior rules defined by JUnit annotations.",
+                R.drawable.ic_beenhere_black_24dp
+            ),
+            Item(
+                "Business",
+                "To create a basic JUnit 4 test class, create a Java class for testing in the directory specified at the beginning of this section. It should contain one or more methods and behavior rules defined by JUnit annotations.",
+                R.drawable.ic_business_center_black_24dp
+            ),
+            Item(
+                "Cloud",
+                "To create a basic JUnit 4 test class, create a Java class for testing in the directory specified at the beginning of this section. It should contain one or more methods and behavior rules defined by JUnit annotations.",
+                R.drawable.ic_cloud_done_black_24dp
+            )
         )
 
         val adapter = ViewPagerAdapter(data)
 
 
         viewPager.adapter = adapter
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) { }
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) { }
+        viewPager.addOnPageChangeListener(this)
 
-            override fun onPageSelected(pos: Int) {
-                currentPosition = pos
-
-                for (a in 0 until dotLayout.childCount) {
-
-                    if (a == pos) {
-                        dotLayout.getChildAt(a).setBackgroundResource(R.drawable.background_light)
-                    } else {
-                        dotLayout.getChildAt(a).setBackgroundResource(R.drawable.background)
-                    }
-                }
-
-                when (pos) {
-                    0 -> btnBack.isEnabled = false
-
-                    dotLayout.childCount - 1 -> {
-                        btnBack.visibility = View.VISIBLE
-                        btnNext.text = "Finish"
-                    }
-                    else -> {
-                        btnBack.isEnabled = true
-                        btnBack.visibility = View.VISIBLE
-                        btnNext.text = "Next"
-                    }
-                }
-            }
-        })
-
-        btnBack.setOnClickListener {
-            viewPager.currentItem = currentPosition - 1
-        }
+        addDot(data.size)
 
         btnNext.setOnClickListener {
             viewPager.currentItem = currentPosition + 1
         }
 
-        addDot(data.size)
+        btnBack.setOnClickListener {
+            viewPager.currentItem = currentPosition - 1
+        }
+    }
+
+    override fun onPageScrollStateChanged(state: Int) {}
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
+    override fun onPageSelected(pos: Int) {
+        currentPosition = pos
+
+        for (a in 0 until dotLayout.childCount) {
+
+            val view = dotLayout.getChildAt(a) as TextView
+
+            if (a == pos) {
+                view.setTextColor(resources.getColor(android.R.color.black))
+            } else {
+                view.setTextColor(resources.getColor(R.color.colorLight))
+            }
+        }
+
+        when (pos) {
+            0 -> btnBack.isEnabled = false
+
+            dotLayout.childCount - 1 -> {
+                btnBack.visibility = View.VISIBLE
+                btnNext.text = "Finish"
+            }
+            else -> {
+                btnBack.isEnabled = true
+                btnBack.visibility = View.VISIBLE
+                btnNext.text = "Next"
+            }
+        }
     }
 
     private fun addDot(data: Int) {
         dotLayout.removeAllViews()
 
-        for (value in 1..data) {
+        for (value in 0 until data) {
             val textView = TextView(this).apply {
-                setBackgroundResource(R.drawable.background)
+                text = Html.fromHtml("&#8226;")
+                textSize = 35.0f
+
+                if (value == 0)
+                    setTextColor(resources.getColor(android.R.color.black))
+                else
+                    setTextColor(resources.getColor(R.color.colorLight))
             }
 
             dotLayout.addView(textView)
