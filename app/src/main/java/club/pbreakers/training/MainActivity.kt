@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
+import club.pbreakers.training.room.DatabaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btnViewPager -> startActivity(Intent(this, ViewPagerActivity::class.java))
-            R.id.btnRoom      -> startActivity(Intent(this, ProfileActivity::class.java))
+            R.id.btnRoom      -> startActivity(Intent(this, DatabaseActivity::class.java))
             R.id.btnDialog    -> startActivity(Intent(this, DialogActivity::class.java))
             R.id.btnDrawer    -> startActivity(Intent(this, DrawerActivity::class.java))
         }
