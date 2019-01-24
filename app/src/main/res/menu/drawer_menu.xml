@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@drawable/ic_business_center_black_24dp"
+        android:id="@+id/home_menu"
+        android:title="Home" />
 
+    <item
+        android:icon="@drawable/ic_beenhere_black_24dp"
+        android:id="@+id/setting_menu"
+        android:title="Setting" />
+
+    <item
+        android:icon="@drawable/ic_business_center_black_24dp"
+        android:id="@+id/about_menu"
+        android:title="About" />
 </menu>
