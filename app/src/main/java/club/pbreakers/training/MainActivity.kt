@@ -30,10 +30,4 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btnDrawer    -> startActivity(Intent(this, DrawerActivity::class.java))
         }
     }
-
-    class MyAsyncTask : AsyncTask<String, Int, Bitmap>() {
-        override fun doInBackground(vararg params: String?): Bitmap {
-            TODO("Slut")
-        }
-    }
 }

@@ -12,6 +12,7 @@ android {
             storePassword 'ericampire'
         }
     }
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "club.pbreakers.training"
@@ -22,18 +23,18 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.config
     }
+
     buildTypes {
         release {
             minifyEnabled false
             signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
         debug {
             signingConfig signingConfigs.config
             debuggable false
         }
-    }
-    productFlavors {
     }
 }
 
